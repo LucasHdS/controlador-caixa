@@ -1,0 +1,22 @@
+@startuml
+actor "Gestor de Compras" as Comprador
+participant "UI WebApp" as UI
+participant "GatewayAPI" as gateway
+participant "LancamentoAPI" as lancamento
+database "PostreSQL (Lancamento)" as LancamentoDB
+queue "RabbitMQ" as Bus
+participant "ConsolidadorAPI" as Consolidador
+database "PostreSQL (Consolidado)" as ConsolidadoDB
+database "Redis Cache" as Cache
+
+Comprador -> UI : Informa dados da compra
+UI -> gateway : POST /lancamento/compra
+gateway -> lancamento : POST /lancamentos/compra (tipo: DEBITO)
+lancamento -> LancamentoDB : INSERT T_LANCAMENTO
+lancamento -> Bus : Evento "lancamentoRealizada"
+Bus -> Consolidador : Envia evento
+
+Consolidador -> ConsolidadoDB : Atualiza saldo consolidado
+
+Consolidador -> Cache : SET chave_saldo_data = novo_saldo
+@enduml

@@ -1,0 +1,23 @@
+@startuml
+actor "Analista Financeiro" as Analista
+participant "UI WebApp" as UI
+participant "PortalBFF" as BFF
+participant "ConsolidadorAPI" as Consolidador
+database "Redis Cache" as Cache
+database "PostgreSQL" as DB
+
+Analista -> UI : Consulta saldo do dia
+UI -> BFF : GET /saldo-diario
+BFF -> Consolidador : GET /saldo-diario
+Consolidador -> Cache : GET chave_saldo_data
+alt Registro encontrado no cache
+    Cache --> Consolidador : Saldo consolidado
+else Registro nao encontrado
+    Consolidador -> DB : Consulta consolidado
+    DB --> Consolidador : Saldo consolidado
+    Consolidador -> Cache : SET chave_saldo_data = saldo
+end
+Consolidador -> BFF : Saldo consolidado
+BFF -> UI : Saldo consolidado
+UI -> Analista : Exibe saldo
+@enduml

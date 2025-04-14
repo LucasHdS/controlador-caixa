@@ -1,0 +1,58 @@
+@startuml
+!pragma layout smetana
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+!define DEVICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+!include DEVICONS/angular.puml
+!include DEVICONS/java.puml
+!include DEVICONS/msql_server.puml
+!include DEVICONS/postgresql.puml
+!include DEVICONS/redis.puml
+!include DEVICONS/redis.puml
+!include DEVICONS/mongodb.puml
+!include FONTAWESOME/users.puml
+
+title Container diagram "Sistema de Controle Financeiro"
+
+SHOW_PERSON_OUTLINE()
+LAYOUT_TOP_DOWN()
+
+' Usuarios
+Person(vendedor, "Vendedor", "Responsavel pelos lancamentos de vendas")
+Person(financeiro, "Analista Financeiro", "Consome o relatorio consolidado diario")
+Person(am, "Gestor de Compras", "Realiza os lancamentos das compras")
+
+' Sistema principal
+System_Boundary(frontend, "Sistema de Controle Financeiro") {
+    Container(webApp, "UI", "", "Portal para lancamentos e relatorios")
+    Container(gateway, "GatewayAPI", ".NET 9", "Recebe requisicoes do portal e direciona para os microsservicos")
+    Container(lancamentoapi, "LancamentoAPI", ".NET 9", "Processa lancamentos realizadas")
+    Container(outboxJob, "OutboxPublisherJob", ".NET 9 JOB", "Publica eventos gravados no outbox para o messagebroker")
+    Container(consolidadorapi, "ConsolidadorAPI", ".NET 9", "Consolida lancamentos para relatorios e calcula saldo")
+    ContainerDb(lancamentoDb, "LancamentoDB", "PostgreSQL", "Armazena dados dos lancamentos", $sprite="postgresql")
+    ContainerDb(eventosdb, "EventsDB", "PostgreSQL", "Armazena os eventos para serem publicados no messagebroker", $sprite="postgresql")
+    ContainerDb(cache, "Cache", "Redis", "Armazena saldo consolidado", $sprite="redis")
+    ContainerDb(consolidadorDb, "ConsolidadorDB", "PostgreSQL", "Armazena saldo consolidado", $sprite="postgresql")
+    Container(message_bus, "MessageBus", "RabbitMQ", "Transporte de eventos")
+}
+
+' Relacoes com usuarios
+Rel_D(vendedor, webApp, "Usa", "HTTPS")
+Rel_D(financeiro, webApp, "Usa", "HTTPS")
+Rel_D(am, webApp, "Usa", "HTTPS")
+
+' Fluxo interno do sistema
+Rel_D(webApp, gateway, "Request para BFF", "REST")
+Rel_D(gateway, lancamentoapi, "Envia lancamentos", "REST")
+Rel_D(gateway, consolidadorapi, "Consulta resultados consolidados", "REST")
+Rel_D(lancamentoapi, eventosdb, "Salva eventos para serem publicados", "Publisher")
+Rel_L(outboxJob, eventosdb, "Consulta eventos para publicar", "Polling")
+Rel_R(outboxJob, message_bus, "Publica eventos de lancamentos", "Publisher")
+Rel_D(consolidadorapi, message_bus, "Consome eventos", "Subscriber")
+Rel_L(lancamentoapi, lancamentoDb, "Registra lancamentos", "Read/Write")
+Rel_D(consolidadorapi, cache, "Consulta saldo diario", "Read")
+Rel_R(consolidadorapi, consolidadorDb, "Armazenado saldo consolidado", "Read/Write")
+
+SHOW_FLOATING_LEGEND()
+@enduml

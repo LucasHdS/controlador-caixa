@@ -1,0 +1,53 @@
+@startuml
+!pragma layout smetana
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+!define DEVICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+!include DEVICONS/angular.puml
+!include DEVICONS/java.puml
+!include DEVICONS/msql_server.puml
+!include DEVICONS/postgresql.puml
+!include DEVICONS/redis.puml
+!include DEVICONS/redis.puml
+!include FONTAWESOME/users.puml
+
+title Container diagram "Sistema de Controle Financeiro"
+
+SHOW_PERSON_OUTLINE()
+LAYOUT_TOP_DOWN()
+
+' Usuarios
+Person(vendedor, "Vendedor", "Responsavel pelos lancamentos de vendas")
+Person(financeiro, "Analista Financeiro", "Consome o relatorio consolidado diario")
+Person(am, "Gestor de Compras", "Realiza os lancamentos das compras")
+
+' Sistema principal
+System_Boundary(frontend, "Sistema de Controle Financeiro") {
+    Container(webApp, "UI", "", "Portal para lancamentos e relatorios")
+    Container(gateway, "GatewayAPI", ".NET 9 Ocelot", "Recebe requisicoes do portal e direciona para os microsservicos")
+    Container(lancamentoapi, "LancamentoAPI", ".NET 9", "Processa lancamentos realizadas")
+    Container(consolidadorapi, "ConsolidadorAPI", ".NET 9", "Consolida lancamentos para relatorios e calcula saldo")
+    ContainerDb(lancamentoDb, "LancamentoDB", "PostgreSQL", "Armazena dados dos lancamentos", $sprite="postgresql")
+    ContainerDb(cache, "Cache", "Redis", "Armazena saldo consolidado", $sprite="redis")
+    ContainerDb(consolidadorDb, "ConsolidadorDB", "PostgreSQL", "Armazena lancamentos e saldo consolidado", $sprite="postgresql")
+    Container(message_bus, "MessageBus", "RabbitMQ", "Transporte de eventos")
+}
+
+' Relacoes com usuarios
+Rel_D(vendedor, webApp, "Usa", "HTTPS")
+Rel_D(financeiro, webApp, "Usa", "HTTPS")
+Rel_D(am, webApp, "Usa", "HTTPS")
+
+' Fluxo interno do sistema
+Rel_D(webApp, gateway, "Request para GatewayAPI", "REST")
+Rel_D(gateway, lancamentoapi, "Envia lancamentos", "REST")
+Rel_D(gateway, consolidadorapi, "Consulta resultados consolidados", "REST")
+Rel_D(lancamentoapi, message_bus, "Publica eventos das lancamentos", "Publisher")
+Rel_D(consolidadorapi, message_bus, "Consome eventos", "Subscriber")
+Rel_L(lancamentoapi, lancamentoDb, "Registra lancamentos", "Read/Write")
+Rel_D(consolidadorapi, cache, "Consulta e atualiza saldo diario", "Read/Write")
+Rel_R(consolidadorapi, consolidadorDb, "Armazenado saldo consolidado", "Read/Write")
+
+SHOW_FLOATING_LEGEND()
+@enduml

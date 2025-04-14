@@ -1,0 +1,29 @@
+@startuml
+title Estrutura Organizacional - Contextos e Capacidades de Negocio
+
+skinparam rectangle {
+  BackgroundColor White
+  BorderColor Black
+  RoundCorner 10
+}
+skinparam linetype ortho
+skinparam defaultTextAlignment center
+
+package "Contextos Organizacionais" {
+  rectangle VendasCtx as "Contexto: Vendas\nResponsavel pelas vendas do comercio"
+  rectangle SuprimentosCtx as "Contexto: Suprimentos\nResponsavel pelas compras para o comercio"
+  rectangle FinanceiroCtx as "Contexto: Financeiro\nResponsavel pela saude financeira do comercio"
+}
+
+package "Capacidades de Negocio" {
+  rectangle VendaProdutos as "Capacidade: Venda de Produtos"
+  rectangle CompraProdutos as "Capacidade: Compra de Produtos"
+  rectangle GestaoFinanceira as "Capacidade: Gestao Financeira"
+}
+
+' Relacionamentos
+VendasCtx --> VendaProdutos : Possui
+SuprimentosCtx --> CompraProdutos : Possui
+FinanceiroCtx --> GestaoFinanceira : Possui
+
+@enduml

@@ -1,0 +1,28 @@
+@startuml
+actor "Gestor de Compras" as Comprador
+participant "UI WebApp" as UI
+participant "GatewayAPI" as gateway
+participant "LancamentoAPI" as lancamento
+database "PostgreSQL (Lancamento)" as lancamentoDB
+database "PostgreSQL (EventoDB)" as Outbox
+participant "OutboxPublisherJob" as OutboxJob
+queue "RabbitMQ" as Bus
+participant "ConsolidadorAPI" as Consolidador
+database "PostreSQL (Consolidado)" as ConsolidadorDB
+database "Redis" as Cache
+
+Comprador -> UI : Informa dados da compra
+UI -> gateway : POST /lancamento/compra
+gateway -> lancamento : POST /lancamento/compra (tipo: DEBITO)
+lancamento -> lancamentoDB : INSERT T_LANCAMENTO
+lancamento -> Outbox : INSERT evento (status: PENDENTE)
+
+...delay...
+OutboxJob -> Outbox : Busca eventos PENDENTES
+OutboxJob -> Bus : Publica evento
+OutboxJob -> Outbox : Atualiza status para ENVIADO
+
+Bus -> Consolidador : Evento de lancamento recebida
+Consolidador -> ConsolidadoDB : Atualiza saldo consolidado
+Consolidador -> Cache : SET chave_saldo_data = novo_saldo
+@enduml

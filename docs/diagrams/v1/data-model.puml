@@ -1,0 +1,46 @@
+@startuml
+!define table(x) class x << (T,#FFAAAA) >>
+!define primaryKey(x) <u>x</u>
+!define notNull(x) <b>x</b>
+
+title MER - Sistema de Controle de Caixa
+
+' --- Tabelas do schema LANCAMENTO ---
+
+table(T_NATUREZA) {
+    primaryKey(PK_NATUREZA): uuid
+    notNull(TX_DESCRICAO): varchar
+    notNull(DT_CADASTRO): datetime
+    notNull(CD_NATUREZA): varchar
+}
+
+table(T_TIPO_LANCAMENTO) {
+    primaryKey(PK_TP_LANCAMENTO): uuid
+    notNull(FK_NATUREZA): long
+    notNull(TX_DESCRICAO): varchar
+    notNull(CD_TIPO_LANCAMENTO): varchar
+    notNull(DT_CADASTRO): datetime
+}
+
+table(T_LANCAMENTO) {
+    primaryKey(PK_LANCAMENTO): long
+    notNull(FK_TP_LANCAMENTO): uuid
+    notNull(VALOR): decimal
+    notNull(NUM_LANCAMENTO): uuid
+    notNull(DT_CADASTRO): datetime
+}
+
+' --- Tabelas do schema consolidador ---
+
+table(consolidador_T_SALDO_DIARIO) {
+    primaryKey(PK_SALDO_DIARIO): uuid
+    notNull(DT_SALDO): datetime
+    notNull(VALOR): decimal = 0
+    notNull(DT_CADASTRO): datetime
+}
+
+' --- Relacionamentos ---
+
+T_TIPO_LANCAMENTO::FK_NATUREZA --> T_NATUREZA::PK_NATUREZA
+T_LANCAMENTO::FK_TP_LANCAMENTO --> T_TIPO_LANCAMENTO::PK_TP_LANCAMENTO
+@enduml
