@@ -1,11 +1,11 @@
-﻿using Consolidador.Application.Abstractions.Data;
-using Consolidador.Domain.SaldoDiarioConsolidado;
+﻿using Application.Abstractions.Data;
+using Domain.SaldoDiarioConsolidado;
 using Core.Abstractions.Data;
 using Core.Common;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Consolidador.Persistence;
+namespace Persistence;
 public class ApplicationDbContext : DbContext, IApplicationDbContext, IUnitOfWork
 {
     private readonly IPublisher _publisher;

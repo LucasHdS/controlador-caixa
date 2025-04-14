@@ -14,15 +14,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{92E43176-984
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{49E99852-58FC-40AF-853C-368F14278C7D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Consolidador.Api", "consolidador\src\consolidador.api\Consolidador.Api.csproj", "{93FF454E-0D23-4440-A425-5CDAFBEDBFD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "consolidador\src\consolidador.api\Api.csproj", "{93FF454E-0D23-4440-A425-5CDAFBEDBFD4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Consolidador.Application", "consolidador\src\consolidador.application\Consolidador.Application.csproj", "{D7167C25-BBC0-4519-BC60-28C3E67AF0C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "consolidador\src\consolidador.application\Application.csproj", "{D7167C25-BBC0-4519-BC60-28C3E67AF0C0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Consolidador.Domain", "consolidador\src\consolidador.domain\Consolidador.Domain.csproj", "{82D80C6D-42CF-45E7-A0F8-85BFA3EF41F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "consolidador\src\consolidador.domain\Domain.csproj", "{82D80C6D-42CF-45E7-A0F8-85BFA3EF41F4}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Consolidador.Infrastructure", "consolidador\src\consolidador.infrastructure\Consolidador.Infrastructure.csproj", "{E879B0AB-820E-4163-99C1-5FD4BA26DCD0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "consolidador\src\consolidador.infrastructure\Infrastructure.csproj", "{E879B0AB-820E-4163-99C1-5FD4BA26DCD0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Consolidador.Persistence", "consolidador\src\consolidador.persistence\Consolidador.Persistence.csproj", "{D5873545-4B18-42E9-9503-D6245E2A394F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence", "consolidador\src\consolidador.persistence\Persistence.csproj", "{D5873545-4B18-42E9-9503-D6245E2A394F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "lancamento\src\lancamento.api\Api.csproj", "{901494A5-12FB-4744-B00D-C127C7D4E795}"
 EndProject
@@ -47,8 +47,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.IntegrationTests", "consolidador\tests\application.integrationTests\Application.IntegrationTests.csproj", "{1EC4EE3D-D48A-1E5B-A6F7-117CAA51D62C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.UnitTests", "consolidador\tests\domain.unitTests\Domain.UnitTests.csproj", "{612192DD-29C7-BD5E-42C5-992E300E8444}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.UnitTests", "consolidador\tests\application.unitTests\Application.UnitTests.csproj", "{5BFAA63B-33AD-C0D4-71E1-0CBC1661FE85}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -124,10 +122,6 @@ Global
 		{612192DD-29C7-BD5E-42C5-992E300E8444}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{612192DD-29C7-BD5E-42C5-992E300E8444}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{612192DD-29C7-BD5E-42C5-992E300E8444}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5BFAA63B-33AD-C0D4-71E1-0CBC1661FE85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5BFAA63B-33AD-C0D4-71E1-0CBC1661FE85}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5BFAA63B-33AD-C0D4-71E1-0CBC1661FE85}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5BFAA63B-33AD-C0D4-71E1-0CBC1661FE85}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -151,7 +145,6 @@ Global
 		{DC89BC7A-3CC1-0840-5347-854E5A192F3F} = {49E99852-58FC-40AF-853C-368F14278C7D}
 		{1EC4EE3D-D48A-1E5B-A6F7-117CAA51D62C} = {6766BFEA-9200-46C8-BBA8-102F6CE6F4BB}
 		{612192DD-29C7-BD5E-42C5-992E300E8444} = {6766BFEA-9200-46C8-BBA8-102F6CE6F4BB}
-		{5BFAA63B-33AD-C0D4-71E1-0CBC1661FE85} = {6766BFEA-9200-46C8-BBA8-102F6CE6F4BB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AFCD3BC2-FCC9-4811-B4C5-01A6D80F4562}

@@ -1,9 +1,9 @@
-﻿using Consolidador.Application.SaldoDiarioConsolidado.AtualizarSaldoDiario;
+﻿using Application.SaldoDiarioConsolidado.AtualizarSaldoDiario;
 using Core.Abstractions.Messaging;
 using IntegrationEvents;
 using MediatR;
 
-namespace Consolidador.Application.Lancamentos;
+namespace Application.Lancamentos;
 
 public class LancamentoRealizadoIntegrationEventHandler(ISender sender) : IIntegrationEventHandler<LancamentoRealizadoIntegrationEvent>
 {

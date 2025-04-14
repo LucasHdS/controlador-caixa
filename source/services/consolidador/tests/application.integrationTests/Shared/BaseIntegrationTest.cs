@@ -1,4 +1,4 @@
-﻿using Consolidador.Persistence;
+﻿using Persistence;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 

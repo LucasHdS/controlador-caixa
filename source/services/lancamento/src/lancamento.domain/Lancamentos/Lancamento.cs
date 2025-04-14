@@ -16,6 +16,6 @@ public class Lancamento : Entity
         TipoLancamentoId = tipoLancamento.Id;
         Valor = tipoLancamento.Natureza.CodigoNatureza == NaturezaEnum.CREDITO ? Math.Abs(valor) : -Math.Abs(valor);
         
-        Raise(new LancamentoRealizadoDomainEvent(Id,NumeroLancamento,Valor));
+        Raise(new LancamentoRealizadoDomainEvent(Id,NumeroLancamento,Valor, DataCadastro));
     }
 }

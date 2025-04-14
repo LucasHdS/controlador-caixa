@@ -1,4 +1,4 @@
-﻿namespace Consolidador.Domain.SaldoDiarioConsolidado;
+﻿namespace Domain.SaldoDiarioConsolidado;
 
 public interface ISaldoDiarioRepository
 {

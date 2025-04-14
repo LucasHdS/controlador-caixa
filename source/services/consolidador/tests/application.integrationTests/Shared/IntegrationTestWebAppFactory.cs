@@ -3,8 +3,9 @@ using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Consolidador.Persistence;
+using Persistence;
 using Testcontainers.PostgreSql;
+using Testcontainers.Redis;
 
 namespace Application.IntegrationTests.Shared;
 
@@ -17,6 +18,9 @@ public class IntegrationTestWebAppFactory : WebApplicationFactory<Program>, IAsy
         .WithPassword("postgres")
         .Build();
 
+    private readonly RedisContainer _redisContainer = new RedisBuilder()
+      .WithImage("redis:7.0")
+      .Build();
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.ConfigureTestServices(services =>
@@ -34,16 +38,23 @@ public class IntegrationTestWebAppFactory : WebApplicationFactory<Program>, IAsy
                 options
                     .UseNpgsql(_dbContainer.GetConnectionString());
             });
+
+            services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = $"{_redisContainer.Hostname}:{_redisContainer.GetMappedPublicPort(6379)}";
+            });
         });
     }
 
-    public Task InitializeAsync()
+    public async Task InitializeAsync()
     {
-        return _dbContainer.StartAsync();
+        await _dbContainer.StartAsync();
+        await _redisContainer.StartAsync();
     }
 
-    public new Task DisposeAsync()
+    public async Task DisposeAsync()
     {
-        return _dbContainer.StopAsync();
+        await _dbContainer.StopAsync();
+        await _redisContainer.StopAsync();
     }
 }

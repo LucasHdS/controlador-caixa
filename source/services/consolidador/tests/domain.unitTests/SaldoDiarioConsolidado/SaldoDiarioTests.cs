@@ -1,4 +1,4 @@
-﻿using Consolidador.Domain.SaldoDiarioConsolidado;
+﻿using Domain.SaldoDiarioConsolidado;
 
 namespace Domain.UnitTests.SaldoDiarioConsolidado;
 public class SaldoDiarioTests

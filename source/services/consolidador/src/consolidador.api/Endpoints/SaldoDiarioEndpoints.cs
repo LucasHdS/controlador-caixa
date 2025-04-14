@@ -1,8 +1,8 @@
 using Carter;
-using Consolidador.Application.SaldoDiarioConsolidado.ObterSaldoDiario;
+using Application.SaldoDiarioConsolidado.ObterSaldoDiario;
 using MediatR;
 
-namespace Consolidador.Api.Endpoints;
+namespace Api.Endpoints;
 
 public class SaldoDiarioEndpoints : ICarterModule
 {

@@ -1,8 +1,8 @@
-﻿using Consolidador.Domain.SaldoDiarioConsolidado;
+﻿using Domain.SaldoDiarioConsolidado;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Consolidador.Persistence.Configurations;
+namespace Persistence.Configurations;
 internal class SaldoDiarioConfiguration : IEntityTypeConfiguration<SaldoDiario>
 {
     public void Configure(EntityTypeBuilder<SaldoDiario> builder)

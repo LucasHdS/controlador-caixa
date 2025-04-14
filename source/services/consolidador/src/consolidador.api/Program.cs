@@ -1,9 +1,9 @@
-using Consolidador.Application;
-using Consolidador.Infrastructure;
-using Consolidador.Persistence;
+using Application;
+using Infrastructure;
+using Persistence;
 using Carter;
-using Consolidador.Api.Middlewares;
-using Consolidador.Api.Extensions;
+using Api.Middlewares;
+using Api.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 

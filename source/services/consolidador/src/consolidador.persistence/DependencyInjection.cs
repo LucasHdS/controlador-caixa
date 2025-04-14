@@ -1,12 +1,12 @@
-﻿using Consolidador.Application.Abstractions.Data;
-using Consolidador.Domain.SaldoDiarioConsolidado;
-using Consolidador.Persistence.Repositories;
+﻿using Application.Abstractions.Data;
+using Domain.SaldoDiarioConsolidado;
+using Persistence.Repositories;
 using Core.Abstractions.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Consolidador.Persistence;
+namespace Persistence;
 public static class DependencyInjection
 {
     public static IServiceCollection AddPersistence(

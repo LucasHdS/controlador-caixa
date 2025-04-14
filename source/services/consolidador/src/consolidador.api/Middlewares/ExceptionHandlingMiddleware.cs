@@ -1,7 +1,7 @@
 ﻿using Core.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Consolidador.Api.Middlewares;
+namespace Api.Middlewares;
 
 public class ExceptionHandlingMiddleware
 {

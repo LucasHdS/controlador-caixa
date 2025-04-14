@@ -1,10 +1,12 @@
-﻿using Consolidador.Application.Lancamentos;
+﻿using Application.Abstractions.Cache;
+using Application.Lancamentos;
+using Infrastructure.Cache;
 using Core.Abstractions.Messaging;
 using EventBus;
 using IntegrationEvents;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Consolidador.Infrastructure;
+namespace Infrastructure;
 public static class DependencyInjection
 {
     public static void AddInfrastructure(this IServiceCollection services)
@@ -21,5 +23,11 @@ public static class DependencyInjection
 
         services.AddScoped<IIntegrationEventHandler<LancamentoRealizadoIntegrationEvent>, LancamentoRealizadoIntegrationEventHandler>();
 
+        services.AddStackExchangeRedisCache(options =>
+        {
+            options.Configuration = Environment.GetEnvironmentVariable("REDIS_HOST")!;
+        });
+
+        services.AddSingleton(typeof(ICacheService<>), typeof(RedisCacheService<>));
     }
 }

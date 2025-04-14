@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\consolidador.domain\Consolidador.Domain.csproj" />
+    <ProjectReference Include="..\..\src\consolidador.domain\Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>

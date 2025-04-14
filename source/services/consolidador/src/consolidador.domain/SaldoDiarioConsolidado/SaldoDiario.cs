@@ -1,6 +1,6 @@
 ﻿using Core.Common;
 
-namespace Consolidador.Domain.SaldoDiarioConsolidado;
+namespace Domain.SaldoDiarioConsolidado;
 public class SaldoDiario : Entity
 {
     public DateOnly Data { get; private set; }

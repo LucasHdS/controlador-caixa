@@ -1,7 +1,7 @@
-﻿using Consolidador.Domain.SaldoDiarioConsolidado;
+﻿using Domain.SaldoDiarioConsolidado;
 using Microsoft.EntityFrameworkCore;
 
-namespace Consolidador.Persistence.Repositories;
+namespace Persistence.Repositories;
 public class SaldoDiarioRepository(ApplicationDbContext context) : ISaldoDiarioRepository
 {
     public SaldoDiario Add(SaldoDiario saldoDiario) => context.SaldosDiarios.Add(saldoDiario).Entity;

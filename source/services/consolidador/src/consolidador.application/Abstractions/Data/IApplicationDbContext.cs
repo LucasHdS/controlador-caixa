@@ -1,7 +1,7 @@
-﻿using Consolidador.Domain.SaldoDiarioConsolidado;
+﻿using Domain.SaldoDiarioConsolidado;
 using Microsoft.EntityFrameworkCore;
 
-namespace Consolidador.Application.Abstractions.Data;
+namespace Application.Abstractions.Data;
 public interface IApplicationDbContext
 {
     DbSet<SaldoDiario> SaldosDiarios { get; set; }

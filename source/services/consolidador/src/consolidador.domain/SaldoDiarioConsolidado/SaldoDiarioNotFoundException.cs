@@ -1,3 +1,3 @@
-﻿namespace Consolidador.Domain.SaldoDiarioConsolidado;
+﻿namespace Domain.SaldoDiarioConsolidado;
 
 public class SaldoDiarioNotFoundException(DateOnly data) : Exception($"Saldo do dia {data} nao encontrado");

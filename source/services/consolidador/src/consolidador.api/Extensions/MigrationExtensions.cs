@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Consolidador.Persistence;
+using Persistence;
 
-namespace Consolidador.Api.Extensions;
+namespace Api.Extensions;
 public static class MigrationExtensions
 {
     public static void ApplyMigrations(this WebApplication app)
