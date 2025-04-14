@@ -1,4 +1,4 @@
-# ADR: 004: Escoladas das Tecnologias dos Bancos de Dados
+# ADR: 004: Escolha das Tecnologias dos Bancos de Dados
 
 ## Contexto
 

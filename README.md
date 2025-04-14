@@ -40,7 +40,7 @@ requisições:** Considerar mudança de workload na consulta do saldo.
 - [ADR: 001: Separação dos Serviços de Lançamento e Consolidação](./docs/adrs/adr-001-separacao-dos-servicos.md)
 - [ADR: 002: Adicionar Camada de Comunicação entre Portal e APIs](./docs/adrs/adr-002-inclusao-de-camada-portal-api.md)
 - [ADR: 003: Escolha do Sistema de Mensageria](./docs/adrs/adr-003-escolha-messagebroker.md)
-- [ADR: 004: Escoladas das Tecnologias dos Bancos de Dados](./docs/adrs/adr-004-escolha-bancos-de-dados.md)
+- [ADR: 004: Escolha das Tecnologias dos Bancos de Dados](./docs/adrs/adr-004-escolha-bancos-de-dados.md)
 - [ADR: 005: Adicionar uma Camada de Cache na Consulta de Saldo](./docs/adrs/adr-005-inclusao-cache.md)
 
 ## Desenho da Solucão
