@@ -59,7 +59,7 @@ requisições:** Considerar mudança de workload na consulta do saldo.
 
 ## Diagramas de Sequencia
 
-O fluxo resumido dos sistema é o seguinte: Usuário acessa portal, faz um lançamento de compra ou venda, a chamada passa pelo gateway, e o serviço de lançamento, gera um débito ou crédito, de acordo com o endpoint chamada (compra ou venda). Após isso, é enviado para o rabbitmq o evento de lancamento realizado, a api de consolidação consome esse evento, e soma o valor do evento, com o saldo diário de acordo com a data do lançamento.
+O fluxo resumido dos sistema é o seguinte: Usuário acessa portal, faz um lançamento de compra ou venda, a chamada passa pelo gateway, e o serviço de lançamento, gera um débito ou crédito, de acordo com o endpoint chamado (compra ou venda). Após isso, é enviado para o rabbitmq o evento de lancamento realizado, a api de consolidação consome esse evento, e soma o valor do presente no evento com o saldo diário de acordo com a data do lançamento.
 
 Os fluxos detalhados das funcionalides podem ser vistos no link abaixo:
 - [Diagramas de Sequência](./docs/diagrams/v1/sequence-diagrams.md#Fluxo)
