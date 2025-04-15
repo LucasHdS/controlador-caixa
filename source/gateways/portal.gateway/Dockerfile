@@ -1,11 +1,21 @@
-FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build-env
-WORKDIR /app
+# Etapa de build
+FROM mcr.microsoft.com/dotnet/sdk:9.0-preview AS build
+
+WORKDIR /src
+
+# Copiar todos os arquivos do projeto
 COPY . ./
 
-RUN dotnet publish /portal.gateway.csproj -c Release -o /app/publish
+# Restaurar dependências
+RUN dotnet restore "portal.gateway.csproj"
+    
+# Build
+RUN dotnet publish -c Release -o /app/publish
 
-FROM mcr.microsoft.com/dotnet/aspnet:9.0
+# Etapa final
+FROM mcr.microsoft.com/dotnet/aspnet:9.0-preview AS runtime
 
-COPY --from=build-env /app/publish ./
-EXPOSE 80
-ENTRYPOINT ["dotnet", "portal.gateway.dll", "--urls", "http://0.0.0.0:80"]
+WORKDIR /app
+COPY --from=build /app/publish .
+
+ENTRYPOINT ["dotnet", "portal.gateway.dll"]

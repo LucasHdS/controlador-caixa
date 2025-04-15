@@ -1,16 +1,15 @@
-using Carter;
 using Application.SaldoDiarioConsolidado.ObterSaldoDiario;
 using MediatR;
 
 namespace Api.Endpoints;
 
-public class SaldoDiarioEndpoints : ICarterModule
+public static class SaldoDiarioEndpoints
 {
-    public void AddRoutes(IEndpointRouteBuilder app)
+    public static RouteGroupBuilder MapSaldoDiarioEndpoints(this RouteGroupBuilder group)
     {
-        var group = app.MapGroup("api/saldoDiario");
+        group.MapGet("{data}", ConsultarSaldoDiario);
 
-        group.MapGet("{data}", ConsultarSaldoDiario).WithName(nameof(ConsultarSaldoDiario));
+        return group;
     }
     public static async Task<IResult> ConsultarSaldoDiario(
     DateOnly data,

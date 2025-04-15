@@ -1,0 +1,41 @@
+# Pastas padrão do .NET
+**/bin/
+**/obj/
+
+# Diretórios de IDEs
+.vscode/
+.idea/
+.vs/
+
+# Diretório Git
+.git/
+.gitignore
+
+# Node.js (se usar frontend junto)
+**/node_modules/
+**/dist/
+
+# Arquivos temporários de usuário
+*.user
+*.suo
+*.swp
+*.DS_Store
+*.log
+
+# Arquivos de configuração locais
+.env
+*.db
+*.sqlite
+*.mdf
+*.ldf
+
+# Arquivos de testes e cobertura
+TestResults/
+coverage/
+*.trx
+*.coverage
+*.log
+
+# Docker output
+docker-compose.override.yml
+docker-compose.debug.yml

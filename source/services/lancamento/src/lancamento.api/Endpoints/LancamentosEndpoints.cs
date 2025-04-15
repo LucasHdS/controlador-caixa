@@ -1,38 +1,30 @@
 ﻿using Application.Lancamentos.RealizarLancamentoCompra;
 using Application.Lancamentos.RealizarLancamentoVenda;
-using Carter;
 using MediatR;
 
 namespace Api.Endpoints;
-public class LancamentosEndpoints : ICarterModule
+public static class LancamentosEndpoints
 {
-    public void AddRoutes(IEndpointRouteBuilder app)
+    public static RouteGroupBuilder MapLancamentoEndpoints (this RouteGroupBuilder group)
     {
-        var group = app.MapGroup("api/lancamento");
+        group.MapPost("/compra", async (RealizarLancamentoCompraRequest request, ISender sender) =>
+        {
+            var command = new RealizarLancamentoCompraCommand(request.Valor);
 
-        group.MapPost("compra", RealizarLancamentoCompra);
-        group.MapPost("venda", RealizarLancamentoVenda);
-    }
+            await sender.Send(command);
 
-    public static async Task<IResult> RealizarLancamentoCompra(
-    RealizarLancamentoCompraRequest request,
-    ISender sender)
-    {
-        var command = new RealizarLancamentoCompraCommand(request.Valor);
+            return Results.Ok();
+        });
 
-        await sender.Send(command);
+        group.MapPost("/venda",async (RealizarLancamentoVendaRequest request, ISender sender) =>
+        {
+            var command = new RealizarLancamentoVendaCommand(request.Valor);
 
-        return Results.Ok();
-    }
+            await sender.Send(command);
 
-    public static async Task<IResult> RealizarLancamentoVenda(
-    RealizarLancamentoVendaRequest request,
-    ISender sender)
-    {
-        var command = new RealizarLancamentoVendaCommand(request.Valor);
+            return Results.Ok();
+        });
 
-        await sender.Send(command);
-
-        return Results.Ok();
+        return group;
     }
 }

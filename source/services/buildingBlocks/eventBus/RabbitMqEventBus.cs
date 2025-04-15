@@ -41,7 +41,7 @@ public class RabbitMqEventBus : IEventBus, IDisposable
 
         _channel.BasicPublish(exchange: "", routingKey: queueName, basicProperties: properties, body: body);
     }
-    public void SubscribeWithHandler<T>(string queueName)
+    public void Subscribe<T>(string queueName)
     {
         DoSubscribe<T>(queueName, async message =>
         {

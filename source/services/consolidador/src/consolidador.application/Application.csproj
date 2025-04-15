@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\buildingBlocks\core\Core.csproj" />
-    <ProjectReference Include="..\..\..\buildingBlocks\IntegrationEvents\IntegrationEvents.csproj" />
+    <ProjectReference Include="..\..\..\buildingBlocks\integrationEvents\IntegrationEvents.csproj" />
     <ProjectReference Include="..\consolidador.domain\Domain.csproj" />
   </ItemGroup>
 

@@ -3,7 +3,7 @@ using Api.Middlewares;
 using Application;
 using Infrastructure;
 using Persistence;
-using Carter;
+using Api.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,24 +15,19 @@ builder.Services.AddInfrastructure();
 builder.Services.AddPersistence(builder.Configuration);
 builder.Services.AddApplication();
 
-builder.Services.AddCarter();
-
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-    app.ApplyMigrations();
-}
+app.UseSwagger();
+app.UseSwaggerUI();
+app.ApplyMigrations();
 
 app.MapControllers();
-
-app.MapCarter();
 
 app.UseHttpsRedirection();
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
+
+app.MapGroup("api/lancamento").MapLancamentoEndpoints();
 
 app.Run();
 

@@ -12,8 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\buildingBlocks\EventBus\EventBus.csproj" />
-    <ProjectReference Include="..\..\..\buildingBlocks\IntegrationEvents\IntegrationEvents.csproj" />
+    <ProjectReference Include="..\..\..\buildingBlocks\eventBus\EventBus.csproj" />
+    <ProjectReference Include="..\..\..\buildingBlocks\integrationEvents\IntegrationEvents.csproj" />
     <ProjectReference Include="..\consolidador.application\Application.csproj" />
   </ItemGroup>
 
