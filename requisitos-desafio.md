@@ -8,9 +8,9 @@
 - Justificativa na decisão/escolha de ferramentas/tecnologias e de tipo de
 arquitetura **OK**
 - Pode ser feito na linguagem que você domina - **OK**
-- Testes
+- Testes - **OK**
 - Readme com instruções claras de como a aplicação funciona, e como
-rodar localmente
+rodar localmente **OK**
 - Hospedar em repositório publico (GitHub) **OK**
 - Desenho da solução da Arquitetura de Transição (se necessária,
 considerando uma migração de legado) - **OK**

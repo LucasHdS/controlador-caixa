@@ -9,9 +9,9 @@
 !include DEVICONS/msql_server.puml
 !include DEVICONS/postgresql.puml
 !include DEVICONS/redis.puml
-!include DEVICONS/redis.puml
 !include DEVICONS/mongodb.puml
 !include FONTAWESOME/users.puml
+!include FONTAWESOME/key.puml
 
 title Container diagram "Sistema de Controle Financeiro"
 
@@ -27,6 +27,7 @@ Person(am, "Gestor de Compras", "Realiza os lancamentos das compras")
 System_Boundary(frontend, "Sistema de Controle Financeiro") {
     Container(webApp, "UI", "", "Portal para lancamentos e relatorios")
     Container(gateway, "GatewayAPI", ".NET 9", "Recebe requisicoes do portal e direciona para os microsservicos")
+    Container(idp, "Identity Provider", "Keycloack", "Gerenciamento de autenticacao e autorizacao.",$sprite="key")
     Container(lancamentoapi, "LancamentoAPI", ".NET 9", "Processa lancamentos realizadas")
     Container(outboxJob, "OutboxPublisherJob", ".NET 9 JOB", "Publica eventos gravados no outbox para o messagebroker")
     Container(consolidadorapi, "ConsolidadorAPI", ".NET 9", "Consolida lancamentos para relatorios e calcula saldo")
@@ -44,6 +45,8 @@ Rel_D(am, webApp, "Usa", "HTTPS")
 
 ' Fluxo interno do sistema
 Rel_D(webApp, gateway, "Request para BFF", "REST")
+Rel_R(webApp, idp, "Realiza login e obtem token de acesso", "REST")
+Rel_R(gateway, idp, "Valida autenticacao", "REST")
 Rel_D(gateway, lancamentoapi, "Envia lancamentos", "REST")
 Rel_D(gateway, consolidadorapi, "Consulta resultados consolidados", "REST")
 Rel_D(lancamentoapi, eventosdb, "Salva eventos para serem publicados", "Publisher")
