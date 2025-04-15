@@ -8,7 +8,7 @@ Um requisito não funcional da aplicação é garantir que todas as chamadas par
 
 Como estamos trabalhando em uma arquitetura distribuida, o serviço de autenticação deve ser capaz de gerenciar multiplos recursos. Para isso, escolhemos utilizar o IDP (Identity Provider) Keycloak. Por ser uma solução robusta, open-source com capacidade de self-hosted e sem custo de licença.
 
-Para garantir que todas as chamadas que chegem nas apis estejam autenticadas, o gateway vai se comunicar com o idp, validando a autenticação de todas as requests que passar por ele.
+Para garantir que todas as chamadas que cheguem nas apis estejam autenticadas, o gateway vai se comunicar com o idp, validando a autenticação de todas as requests que passar por ele.
 
 ## Alternativas
 
