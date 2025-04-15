@@ -6,7 +6,7 @@ O sistema possui duas APIs e apenas um portal que consome endpoints de ambas. Po
 
 ## Decisão
 
-Foi decidido que nesse momento, não será incluido um BFF, considerando que o sistema tem apenas dois serviços, e o BFF nesse primeiro só funcionaria como um gateway, pois não precisaria agregar requests a partir de uma chamada do Portal. Todas as funcionalidades mapeadas atualmente, só consome um endpoint. Como solução sera incluida uma solução de API Gateway stateless com Ocelot.
+Foi decidido que nesse momento, não será incluido um BFF, considerando que o sistema tem apenas dois serviços, e o BFF nesse primeiro só funcionaria como um gateway, pois não precisaria agregar requests a partir de uma chamada do Portal. Todas as funcionalidades mapeadas atualmente, só consome um endpoint. Como solução sera incluida uma solução de API Gateway stateless com YARP.
 
 ## Alternativas
 
