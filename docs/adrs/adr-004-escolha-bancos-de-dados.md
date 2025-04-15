@@ -6,7 +6,7 @@ Todas os lançamentos realizados no sistema, além dos dados consolidados devem 
 
 ## Decisão
 
-Foi decidido usar o PostgreSQL como banco de dados, por ser um banco muito utilizado e sem custo de licença. Além de ser um banco relacional, o que facilita a gestão dos lançamentos, que podem ser de diferentes tipos e naturezas diferentes.
+Foi decidido usar o PostgreSQL como banco de dados, por ser um banco consolidado e sem custo de licença. Além de ser um banco relacional, o que facilita a gestão dos lançamentos, que podem ser de diferentes tipos e naturezas diferentes.
 
 ## Alternativas
 
